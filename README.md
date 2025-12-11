@@ -9,7 +9,7 @@ These patterns help achieve 'Clean' code through:
   - User interface responsiveness (Observer)
 
 
-
+ 
 **1. The Singleton** (Clipboard Class)
 
 Concept: Ensures that a class has only one unique instance and provides a global access point to it.
