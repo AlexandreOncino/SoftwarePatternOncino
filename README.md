@@ -1,7 +1,7 @@
 # Software Patterns Project: TextEditor
 **Author:** Alexandre ONCINO
 
-Project of Software Pattern, made by Alexandre ONCINO. This is a text editor contains 3 patterns (Singleton, Strategy, Observer).
+My project of Software Pattern is a text editor contains 3 patterns (Singleton, Strategy, Observer).
 
 These patterns help achieve 'Clean' code through:
   - Centralized data management (Singleton)
