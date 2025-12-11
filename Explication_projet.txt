@@ -1,0 +1,32 @@
+🎨 Architecture du Projet : Les 3 Design Patterns
+Pour rendre cet éditeur de texte modulaire et facile à maintenir, j'ai implémenté trois patrons de conception majeurs. Voici leur rôle précis dans l'application :
+
+1. Le Singleton (Classe Clipboard)
+C'est quoi ? Ce pattern garantit qu'une classe n'a qu'une seule et unique instance et fournit un point d'accès global à celle-ci.
+
+Pourquoi ici ? Le presse-papier est une ressource partagée unique. Il serait illogique d'avoir plusieurs presse-papiers différents actifs en même temps (on ne saurait plus où on a copié notre texte !).
+
+Dans mon code : Grâce au constructeur private et à la méthode static getInstance(), peu importe où je suis dans l'application, je récupère toujours le même objet pour copier/coller.
+
+2. Le Strategy (Interface ExportStrategy)
+C'est quoi ? Il permet de définir une famille d'algorithmes, de les encapsuler dans des classes séparées et de les rendre interchangeables dynamiquement.
+
+Pourquoi ici ? Pour éviter une longue suite de if (type == WORD) ... else if (type == HTML). Cela respecte le principe Open/Closed : si demain je veux ajouter un format PDF ou Markdown, je crée juste une nouvelle classe sans toucher au code du moteur de l'éditeur.
+
+Dans mon code : L'éditeur possède une méthode setExportStrategy(). L'utilisateur choisit dans la liste déroulante (Word ou HTML), et au moment de cliquer sur "Enregistrer", l'éditeur délègue le travail à la stratégie active sans se soucier de la technique d'écriture du fichier.
+
+3. L'Observer (Interface StatsObserver)
+C'est quoi ? Il définit une dépendance "un-à-plusieurs" : quand un objet change d'état (le Sujet), tous ceux qui l'écoutent (les Observateurs) sont notifiés et mis à jour automatiquement.
+
+Pourquoi ici ? Pour découpler le moteur de l'interface graphique. Le moteur de texte ne doit pas connaître l'existence des labels Swing. Il signale juste "J'ai changé", et l'interface réagit.
+
+Dans mon code : Dès que je tape une lettre, le TextEditor (Sujet) notifie le WordCounterLabel (Observateur). Cela permet d'avoir le compteur de mots et de caractères qui se met à jour en temps réel, de manière fluide.
+
+🚀 En résumé
+L'utilisation de ces patterns permet d'obtenir un code "Clean" :
+
+Gestion centralisée des données (Singleton).
+
+Flexibilité des formats d'enregistrement (Strategy).
+
+Réactivité de l'interface utilisateur (Observer).
